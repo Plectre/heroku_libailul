@@ -1,0 +1,82 @@
+{% block calendarEl %}
+<button class="card" id="btn-refresh">Rafraîchir la page</button>
+<div id='calendar'></div>
+<script>
+    const btn_refresh = document.querySelector("#btn-refresh")
+    btn_refresh.addEventListener('click', ()=>{location.reload()});
+    let calendarEl = document.getElementById('calendar');
+    let calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'timeGridWeek',
+        slotMinTime: '01:00:00',
+        aspectRatio: 2,
+        headerToolbar: {
+            left: "prev next today",
+            center: "title",
+            right: "dayGridMonth timeGridWeek"
+        },
+        buttonText: {
+            today: "Aujourd'hui",
+            month: "Mois",
+            week: "Semaine",
+        },
+        selectable: false,
+        selectOverlap: false,
+        nowIndicator: true,
+        slotMinTime: "06:00:00",
+        slotLabelInterval: "01:00:00",
+        slotDuration: '00:30:00',
+        scrollTime: '01:00:00',
+        unselect: (event)=> {
+            console.log(event)
+        },
+        eventClick: (infos) => {
+                let title = confirm("Supprimer ?")
+                if (title) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "../public/remove_rent", true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify({
+                    user: infos.event["title"],
+                    start : infos.event["startStr"]
+                }));
+                if (xhr.readyState == 4) {
+                    console.log("Remove : " + infos.event.title)
+            } else {
+                console.log("Pas Remove !")
+            }
+        }
+        location.reload()
+        },
+
+        dateClick: (infos) => {
+            let title = confirm("Vous avez réservé à "+infos.dateStr+" \nVous validez ?")
+            if (title == true) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "../public/add_rent", true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify({
+                    user: '',
+                    start : infos.dateStr
+                }));
+                if (xhr.readyState == 4) {
+                    console.log("Validé : " + infos.dateStr);
+                }
+            } else {
+                console.log("Pas validè !");
+            }
+            location.reload();
+        },
+        events : [
+            {% for event in events %}
+                {
+                    title : '{{event.username}}',
+                    start: '{{event.start}}',
+                    end: '{{event.end}}'
+                },
+            {% endfor %}
+        ]
+    });
+    calendar.setOption('locale', 'fr');
+    calendar.render();
+</script>
+{% endblock %}

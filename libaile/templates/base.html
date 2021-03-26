@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<div id=global>
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+        
+        <link type="text/css" href="https://fonts.googleapis.com/css?family=Lato&family=Exo&display=swap" rel="stylesheet">
+        <link type="text/css" href="https://fonts.googleapis.com/css?family=Exo&display=swap" rel="stylesheet">
+        <link type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock title %}</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+    </head>
+    
+    <body>
+        <nav class="nav-bar">
+            <ul>
+                <li><a href="{{url_for('index')}}">La Base</a></li>
+                <li><a href="/#bapteme">Baptême</a></li>
+                <li><a href="/#scool">Ecole</a></li>
+                <li><a href="/#office">Bureau</a></li>
+                <li><a href="{{url_for('contact')}}">contact</a></li>
+                <li><a href="{{url_for('member')}}">{%if session['user']%} {{session['user']}}
+                        {%else%}<i class="icon icon-people">Login</i>{%endif%}</a>
+                </li>
+                <!--<li><a href="{{url_for('login')}}">{{ 'Login' if not session['user'] }}</a></li>-->
+                {% if session['user'] %}<li><a href="{{url_for('logout')}}">Logout</a></li>{% endif %}
+            </ul>
+        </nav>
+        {% block content %}
+        {% endblock content %}
+        {% block footer %}
+        <div class="footer">
+            <p>Powered by Plectre</p>
+            <ul class="social-network">
+                <li><a href="#"><img src="{{ url_for('static' ,filename='images/icons/fb.png')}}" alt="facebook"
+                            width="50px" height="50px"></li></a>
+                <li><a href="#"><img src="{{ url_for('static' ,filename='images/icons/twitter.png')}}" alt="twitter"
+                            width="50px" height="50px"></li></a>
+                <li><a href="#"><img src="{{ url_for('static' ,filename='images/icons/insta.png')}}" alt="instagram"
+                            width="50px" height="50px"></li></a>
+            </ul>
+        </div>
+        {% endblock footer %}
+    </body>
+    <script type="text/javascript" async src="{{url_for('static', filename='js/main.js')}}"></script>
+</div>
+</html>

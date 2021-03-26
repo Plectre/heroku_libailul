@@ -1,0 +1,27 @@
+{% extends ('base.html') %}
+{% block title %}Libaile'Ul - Membre | Login{% endblock title %}
+    {% block content %}
+    {% with messages = get_flashed_messages(with_categories="true") %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category=="error" %}
+                    <h3 class="error">{{ message }}</h3>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h2 id="title_2">Login</h2>
+    <div class="main-content">
+        <form class="form-main" action="/public/login" method="post">
+            <label class="form-title" for="form">Login</label>
+            <p><label class="form-label" for="name">Nom</label>
+                <input class="form-input" type="text" id="name" tabindex="1" name="user" required>
+            </p>
+            <p><label class="form-label" for="password">Password</label>
+                <input class="form-input" type="password" id="password" tabindex="2" name="user_password" required>
+            </p>
+            <input class="sub-button" type="submit" tabindex="3" value="Se connecter">
+        </form>
+    </div>
+    {% endblock content %}
+

@@ -1,0 +1,84 @@
+{% extends ('base.html') %}
+{% block title %}Libaile'Ul - Acceuil-{{user}}{% endblock title %}
+
+{% block content %}
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<div class="content-header">
+    <div id="title">
+        <a href="{{url_for('index')}}">
+            Lib'Aile'UL
+        </a>
+    </div>
+    <p div class="header-sub-title">Le club est une association loi 1901 qui a pour but de faire decouvrir au plus grand
+        nombre
+        les joies du vol en ULM
+        </br>...... En construction ......</p>
+    <div class="mySlide">
+        <img src="" alt="img"></div>
+    <div class="img-desc">
+        <!--<div class="numberText">1/3</div>-->
+    </div>
+</div>
+
+<!-- <div class='card'>
+    <div class="bar-meteo">
+        <p class="def"></p>
+    </div>
+</div> -->
+<!-- icones meteo -->
+{% if meteo %}
+<!-- <div class="card"> -->
+    <div class="icon-bar-meteo">
+        {% for item in meteo %}
+            <span><img src="static/images/empty.png" id="temp"> {{item.temp}}C°</span>
+            <span><img src="static/images/empty.png" id="wind-speed"> {{item.wind_speed}}nds</span>
+            <span><img src="static/images/empty.png" id="wind-dir"> {{item.wind_dir}}°</i></span>
+            <span><img src="static/images/empty.png" id="cloud-desc"> {{item.cloud_desc}}</i></span>
+            <span><img src="static/images/empty.png" id="pressure"> {{item.pressure}}hp</i></span>
+            <span><img src="static/images/empty.png" id="sunset"> {{item.sunset}}</i></span>
+    </div>
+        {% endfor %}
+<!-- </div> -->
+{% endif %}
+{% if infos %}
+<div class="cards">
+    {% for info in infos %}
+    {% if info.is_publish is sameas true %}
+    <div id="info-container">
+        <div id="info-card">
+            <h1>Flash info Lib'aile'ul</h1>
+            <hr>
+            <div id="info-title">
+                <h2>{{info.title}}</h2>
+            </div>
+            <div id="info-content">
+                <h3>{{info.content}}</h3>
+            </div>
+            <div id="info-close">X</div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% for card in cards%}
+    <div class="card">
+        <div class="card-titre">
+            <h3>{{card.title}}</h3>
+        </div>
+        <div class="content">
+            <p>{{card.content}}</p>
+        </div>
+        <div class="picture">
+            <img src="{{card.image}}" type="image" width="150px" height="150px" alt="image du contenu" />
+        </div>
+    </div>
+    {% endfor %}
+    <div class='card'>
+        <iframe class="g-maps"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8376.323497729716!2d-0.7804632660127789!3d44.700816753076154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x605d9089337b17c4!2sBase%20ULM%20CESTAS%20-%20Association%20LibAileUL!5e0!3m2!1sfr!2sfr!4v1610112410246!5m2!1sfr!2sfr"
+            frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
+        </iframe>
+    </div>
+</div>
+<!-- <script type="text/javascript" defer src="{{url_for('static', filename='js/main.js')}}"></script> -->
+{% endblock content %}

@@ -1,0 +1,84 @@
+{% extends ('base.html') %}
+
+    {% block content %}
+    <div class="main-content">
+    <h2 id="title_2">Carnet de vol</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if category=="error" %}
+    <h3 class="error">{{ message }}</h3>
+    {% endif %}
+    {% if category=="success" %}
+    <h3 class="success">{{ message }}</h3>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="table-container">
+    <table class="table">
+        <tr>
+            <th>Date</th>
+            <th>Appareil</th>
+            <th>Ident</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Start</th>
+            <th>Stop</th>
+            <th>Durée</th>
+        </tr>
+        {% for item in val %}
+        <tr>
+            <td>{{item['date']}}</td>
+            <td>{{item['aircraft']}}</td>
+            <td>{{item['ident']}}</td>
+            <td>{{item['fro']}}</td>
+            <td>{{item['to']}}</td>
+            <td>{{item['start']}}</td>
+            <td>{{item['stop']}}</td>
+            <td>{{item['duration']}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+    <div class="card">
+        <form action="add_logbook" method="POST" id="form">
+            <label class="form-title" for="form">Enregistrer un vol</label>
+
+            <label class="form-label" for="Date">Date*</label>
+            <input class="form-input" type="date" id="date" name="date">
+
+            <label class="form-label" for="aircraft">Appareil*</label>
+            <input class="form-input" type="text" id="aircraft" name="aircraft">
+
+            <label class="form-label" for="ident" id="ident" name="ident">Ident*</label>
+            <input class="form-input" type="text" id="ident" name="ident">
+
+            <label class="form-label" for="from" id="from" name="from">From*</label>
+            <input class="form-input" type="text" id="from" name="from">
+
+            <label class="form-label" for="to" id="to" name="to">To*</label>
+            <input class="form-input" type="text" id="to" name="to">
+
+            <label class="form-label" for="horoStart" id="horoStart" name="horoStart">Horodateur Debut</label>
+            <input class="form-input" type="number" id="horoStart" name="horoStart">
+
+            <label class="form-label" for="horoEnd" id="horoEnd" name="horoEnd">Horodateur Fin</label>
+            <input class="form-input" type="number" id="horoEnd" name="horoStop">
+
+            <label class="form-label" for="duration" id="duration" name="duration">Temps de vol</label>
+            <input class="form-input" type="number" id="duration" name="duration">
+
+            <input class="sub-button" type="submit" id="submit" name="submit_log" value="Enregistrer">
+        </form>
+    </div>
+    <div class="card-menu">
+        <a href="{{url_for('member')}}">Retour au hangar</a>
+    </div>
+    <!-- <button id="add-form-btn" onclick="toogle_form()">
+        <h3>+</h3>
+    </button> -->
+</div>
+    <!-- <script type="text/javascript" src="{{url_for('static', filename='js/main.js')}}"></script> -->
+    {% endblock content %}

@@ -1,0 +1,49 @@
+{% extends ('base.html') %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="main-content">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            {% if category=="error" %}
+                <h3 class="error">{{ message }}</h3>
+            {% endif %}
+            {% if category=="success" %}
+                <h3 class="success">{{ message }}</h3>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+
+<h2 id="title_2">Falsh info lib'aile'ul</h2>
+<div class="card">
+    <form class="form-contact" action="publish_info" method="POST">
+        <!-- <label class="" for="form">Flash info !!!</label> -->
+        <div>
+            <label class="" for="title">Titre :</label>
+            <input class="" type="text" name="title">
+        </div>
+        <div>
+            <label class="" for="message">Message :</label>
+            <textarea class="form-input"  width="200px" rows="10" name="message"></textarea>
+        </div>
+        <!-- <div>
+            <label class="" for="publish">Publier</label>
+            <input type="checkbox" name="is_publish"/>
+        </div> -->
+        <div class=btn-radio>
+            <label for="radio-group">Publier ?</label><br>
+            <label for="oui">Oui</label>
+            <input type="radio" name="is_publish" id="1" value="on"/>
+            <label for="non">Non</label>
+            <input type="radio" name="is_publish" id="0" value="off"/>
+        </div>
+        <div class="button">
+            <input class="sub-button"  type="submit" value="Envoyer">
+        </div>
+    </form>
+</div>
+{% endblock content %}

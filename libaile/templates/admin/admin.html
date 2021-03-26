@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="main-content">
+    <h2 id="title_2">Page d'administration</h2>
+    <div class="card-menu">
+        <a href="/public/view">Voir le planning avions</a>
+    </div>
+    <div class="card-menu">
+        <a href="/add_member">Gestion des membres</a>
+    </div>
+    <div class="card-menu">
+        <a href="/admin/fiche_info">Flash info
+        {% for info in infos %}
+        {% if info.is_publish is sameas True %}
+        <h3>&nbsp;est publié</h3>
+        {% else %}
+        <h3> &nbsp;n'est pas publié</h3>
+        {% endif %}
+        {% endfor %}
+        </a>
+    </div>
+</div>
+
+{% endblock content %}

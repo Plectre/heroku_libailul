@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="main-content">
+    <h2 id="title_2">Gestion des membres</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category=="error" %}
+                    <h3 class="error">{{ message }}</h3>
+                {% endif %}
+                {% if category=="success" %}
+                    <h3 class="success">{{ message }}</h3>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="tables">
+        <table class="table">
+            <tr>
+                <th>id</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Administateur</th>
+                <th>Supprimer</th>
+            </tr>
+            {% for item in val %}
+            <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.username}}</td>
+                <td>{{item.email}}</td>
+                <td>{% if item.is_admin=="Oui" %}<span class="material-icons">
+                    admin_panel_settings
+                    </span>{% else %}{% endif %}</td>
+                <td><a href="admin/del/{{item.username}}"><i class="material-icons">delete</i></td></a>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <form class="form-main" action="/addUser" method="post">
+        <label class="form-title" for="form">Ajouter un membre</label>
+        <div>
+            <p><input class="form-input" tabindex="1" type="text" id="name" name="user" placeholder="Nom" required>
+            </p>
+        </div>
+        <div>
+            <input class="form-input" tabindex="2" type="password" id="password" name="user_password"
+                placeholder="Mot de passe" required>
+        </div>
+        <div>
+            <input class="form-input" tabindex="3" type="email" id="email" name="user_email" placeholder="Email" required>
+        </div>
+        <div>
+            <label for="is-admin">Administrateur : </label>
+            <input type="checkbox" id="is_admin" name="is_admin"></p>
+        </div>
+        <input class="sub-button" tabindex="4" type="submit" value="Ajouter">
+    </form>
+
+    <div class="card-menu">
+        <a href="admin">Retour a la page administration</a>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,40 @@
+{
+  "coord": {
+    "lon": -0.78,
+    "lat": 44.7
+  },
+  "weather": [{
+    "id": 803,
+    "main": "Clouds",
+    "description": "nuageux",
+    "icon": "04d"
+  }],
+  "base": "stations",
+  "main": {
+    "temp": 10.75,
+    "pressure": 1007,
+    "humidity": 93,
+    "temp_min": 10,
+    "temp_max": 11.11
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 4.1,
+    "deg": 150
+  },
+  "clouds": {
+    "all": 64
+  },
+  "dt": 1574758488,
+  "sys": {
+    "type": 1,
+    "id": 6450,
+    "country": "FR",
+    "sunrise": 1574752431,
+    "sunset": 1574785628
+  },
+  "timezone": 3600,
+  "id": 3022347,
+  "name": "Croix d'Hins",
+  "cod": 200
+}

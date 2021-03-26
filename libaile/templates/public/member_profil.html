@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Libaile'Ul - Profil{% endblock title %}
+
+{% block content %}
+<div class="main-content">
+    <h2 id="title_2">Profil {{user_profil.username}}</h2>
+    <div class="cards-menu">
+        <div class="card-menu">
+            <div class="title">Email</div>
+            {{user_profil.email}}
+        </div>
+        <div class="card-menu">
+            <div class="btn-deploy">
+                <input class="btn btn-primary" type="submit" name="btn_pass_update"
+                    value="Changer votre mot de passe" />
+            </div>
+
+            <div class="form-main">
+                <form action="password-update" method="post">
+                    <label class="form-label" for="email-1">Taper votre mot de passe</label>
+                    <input type="password" name="email-1" id="email-1" placeholder="Mot de passe">
+                    <label class="form-label" for="email-2">Taper votre mot de passe</label>
+                    <input type="password" name="email-2" id="email-2" placeholder="Mot de passe">
+                    <input type="submit" name="submit" value="Envoyer">
+                </form>
+            </div>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        {% if category=="error" %}
+        <h3 class="error">{{ message }}</h3>
+        {% endif %}
+        {% if category=="success" %}
+        <h3 class="success">{{ message }}</h3>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <div class="card-menu">
+            <a href="{{url_for('member')}}">Retour au hangar</a>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{url_for('static', filename='js/test.js')}}"></script>
+</div>
+{% endblock content %}

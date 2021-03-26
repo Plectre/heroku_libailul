@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Libaile'Ul - Contact{% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="main-content">
+<h2 id="title_2">Bienvenue jeune prè pubére</h2>
+    <form class="form-contact" action="send_email" method="POST">
+        <label class="form-title" for="form">Contact</label>
+        <div>
+            <label class="form-label" for="name">Nom :</label>
+            <input class="form-input" type="text" id="name" name="name">
+        </div>
+        <div>
+            <label class="form-label" for="email">Email :</label>
+            <input class="form-input"  type="email" id="email" name="email">
+        </div>
+        <div>
+            <label class="form-label" for="message">Message :</label>
+            <textarea class="form-input"  rows="10" id="msg" name="message"></textarea>
+        </div>
+        <div class="button">
+            <input class="sub-button"  type="submit" value="Envoyer">
+        </div>
+    </form>
+</div>
+{% endblock content %}
